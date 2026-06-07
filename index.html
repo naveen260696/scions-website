@@ -86,6 +86,9 @@ nav{
 .svc-title{font-weight:500;font-size:1rem;margin-bottom:0.5rem;color:var(--text)}
 .svc-desc{color:var(--text2);font-size:0.875rem;line-height:1.65}
 .svc-pill{display:inline-block;margin-top:1rem;font-size:0.72rem;font-weight:500;color:var(--pill-text);background:var(--pill-bg);border-radius:100px;padding:0.2rem 0.7rem}
+a.service-card{text-decoration:none;display:block;cursor:pointer}
+.svc-arrow{display:inline-flex;align-items:center;gap:4px;margin-top:0.75rem;font-size:0.78rem;color:var(--accent);opacity:0;transform:translateX(-4px);transition:opacity 0.2s,transform 0.2s}
+a.service-card:hover .svc-arrow{opacity:1;transform:translateX(0)}
 
 /* WHY */
 #why{border-top:1px solid var(--border)}
@@ -174,8 +177,8 @@ footer{border-top:1px solid var(--border);padding:1.75rem 5vw;display:flex;align
   <a href="#" class="logo">Sci<span>ons</span></a>
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
-    <li><a href="#why">Why us</a></li>
-    <li><a href="#process">Process</a></li>
+    <li><a href="/cybersecurity">Cybersecurity</a></li>
+    <li><a href="/automation">Automation</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <a href="#contact" class="nav-cta">Get in touch</a>
@@ -203,42 +206,47 @@ footer{border-top:1px solid var(--border);padding:1.75rem 5vw;display:flex;align
     <h2 class="section-title">Services built for small business reality</h2>
     <p class="section-sub">No bloated retainers. No enterprise jargon. Just the right protection and automation for where you are now.</p>
     <div class="services-grid">
-      <div class="service-card">
+      <a href="/cybersecurity" class="service-card">
         <div class="svc-icon-wrap ic-blue">🔒</div>
         <div class="svc-title">Cybersecurity assessment</div>
         <div class="svc-desc">Identify vulnerabilities before attackers do. We audit your posture and deliver a clear remediation roadmap.</div>
         <span class="svc-pill">Risk reduction</span>
-      </div>
-      <div class="service-card">
+        <div class="svc-arrow">Explore →</div>
+      </a>
+      <a href="/automation" class="service-card">
         <div class="svc-icon-wrap ic-purple">⚙️</div>
         <div class="svc-title">IT onboarding & offboarding</div>
         <div class="svc-desc">Automate the employee lifecycle — provisioning, access controls, and secure offboarding in minutes, not days.</div>
         <span class="svc-pill">Automation</span>
-      </div>
-      <div class="service-card">
+        <div class="svc-arrow">Explore →</div>
+      </a>
+      <a href="/automation" class="service-card">
         <div class="svc-icon-wrap ic-teal">🏗️</div>
         <div class="svc-title">Infrastructure at minimum cost</div>
         <div class="svc-desc">Lean, secure infrastructure using modern cloud tools. Enterprise reliability without the enterprise price tag.</div>
         <span class="svc-pill">Cost optimized</span>
-      </div>
+        <div class="svc-arrow">Explore →</div>
+      </a>
       <div class="service-card">
         <div class="svc-icon-wrap ic-blue">📄</div>
         <div class="svc-title">Documentation & runbooks</div>
         <div class="svc-desc">Every engagement comes fully documented. Policies and runbooks your team can actually follow.</div>
         <span class="svc-pill">Knowledge transfer</span>
       </div>
-      <div class="service-card">
+      <a href="/cybersecurity" class="service-card">
         <div class="svc-icon-wrap ic-purple">🛡️</div>
         <div class="svc-title">Security policy development</div>
         <div class="svc-desc">Acceptable use, incident response, password policies — tailored to your size and industry.</div>
         <span class="svc-pill">Compliance ready</span>
-      </div>
-      <div class="service-card">
+        <div class="svc-arrow">Explore →</div>
+      </a>
+      <a href="/automation" class="service-card">
         <div class="svc-icon-wrap ic-teal">🔄</div>
         <div class="svc-title">Workflow automation</div>
         <div class="svc-desc">Eliminate repetitive IT tasks. Automated alerts, self-healing scripts, and more.</div>
         <span class="svc-pill">Efficiency</span>
-      </div>
+        <div class="svc-arrow">Explore →</div>
+      </a>
     </div>
   </div>
 </section>
