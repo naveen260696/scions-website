@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>IT Automation – Scions</title>
+<meta name="description" content="Scions automates your IT workflows — onboarding, offboarding, and beyond. API-based and UI-based automation for any application."/>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@300;400;500;600&family=Google+Sans+Display:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f8f9fd;--surface:#fff;--text:#1c1b1f;--text2:#44464f;--text3:#76777f;
+  --accent:#1a73e8;--border:#e3e6f0;--pill-bg:#e8f0fe;--pill-text:#1558b0;
+  --font:'Google Sans','Segoe UI',system-ui,sans-serif;
+  --font-display:'Google Sans Display','Google Sans',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:16px;line-height:1.6;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 20% 10%,rgba(26,115,232,0.07) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(161,66,244,0.05) 0%,transparent 60%);pointer-events:none;z-index:0}
+section,nav,footer,.hero-wrap,.demo-wrap{position:relative;z-index:1}
+
+/* NAV */
+nav{display:flex;align-items:center;justify-content:space-between;padding:0 5vw;height:64px;background:rgba(248,249,253,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+.logo{font-family:var(--font-display);font-size:1.35rem;font-weight:500;color:var(--text);letter-spacing:-0.01em;text-decoration:none}
+.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:0.25rem;list-style:none}
+.nav-links a{color:var(--text2);text-decoration:none;font-size:0.875rem;padding:0.4rem 0.85rem;border-radius:100px;transition:background 0.15s,color 0.15s}
+.nav-links a:hover,.nav-links a.active{background:var(--pill-bg);color:var(--accent)}
+.nav-cta{background:var(--accent);color:#fff;border:none;padding:0.5rem 1.25rem;border-radius:100px;font-family:var(--font);font-size:0.875rem;font-weight:500;cursor:pointer;text-decoration:none;box-shadow:0 1px 3px rgba(26,115,232,0.3);transition:box-shadow 0.2s,opacity 0.2s}
+.nav-cta:hover{opacity:0.92}
+
+/* HERO */
+.hero-wrap{max-width:860px;margin:0 auto;padding:5rem 5vw 3rem;text-align:center}
+.eyebrow{display:inline-block;font-size:0.78rem;font-weight:500;letter-spacing:0.08em;color:var(--accent);text-transform:uppercase;background:var(--pill-bg);padding:0.25rem 0.75rem;border-radius:100px;margin-bottom:1rem}
+.hero-wrap h1{font-family:var(--font-display);font-size:clamp(2.2rem,4.5vw,3.5rem);font-weight:500;line-height:1.15;letter-spacing:-0.02em;color:var(--text);margin-bottom:1.25rem}
+.hero-wrap h1 .grad{background:linear-gradient(135deg,#1a73e8 0%,#a142f4 60%,#12b5cb 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-wrap p{font-size:1.05rem;color:var(--text2);max-width:560px;margin:0 auto 2rem;line-height:1.75}
+.hero-ctas{display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--accent);color:#fff;border:none;padding:0.8rem 1.75rem;border-radius:100px;font-family:var(--font);font-size:0.95rem;font-weight:500;cursor:pointer;text-decoration:none;box-shadow:0 1px 3px rgba(26,115,232,0.3);transition:box-shadow 0.2s,transform 0.15s;display:inline-block}
+.btn-primary:hover{box-shadow:0 4px 12px rgba(26,115,232,0.35);transform:translateY(-1px)}
+.btn-ghost{background:var(--surface);color:var(--accent);border:1.5px solid var(--border);padding:0.8rem 1.75rem;border-radius:100px;font-family:var(--font);font-size:0.95rem;font-weight:500;cursor:pointer;text-decoration:none;transition:border-color 0.2s;display:inline-block}
+.btn-ghost:hover{border-color:var(--accent);background:var(--pill-bg)}
+
+/* INTERACTIVE DEMO */
+.demo-wrap{max-width:1100px;margin:0 auto;padding:1rem 3vw 4rem}
+.demo-stage{
+  background:#fff;border:1px solid var(--border);border-radius:24px;
+  padding:2.5rem 2rem;
+  display:grid;grid-template-columns:220px 1fr 220px;
+  gap:1.5rem;align-items:center;min-height:480px;
+  position:relative;overflow:hidden;
+}
+.demo-stage::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(26,115,232,0.03) 0%,transparent 70%);pointer-events:none}
+
+/* LEFT — integrations */
+.integrations-panel{background:#f8f9fd;border:1px solid var(--border);border-radius:16px;padding:1rem}
+.panel-title{font-size:0.75rem;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.75rem;padding:0 0.25rem}
+.integrations-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem}
+.int-chip{
+  background:#fff;border:1px solid var(--border);border-radius:10px;
+  padding:0.6rem;display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;cursor:pointer;
+  transition:border-color 0.2s,transform 0.15s,box-shadow 0.2s;
+  position:relative;
+}
+.int-chip:hover{border-color:var(--accent);transform:scale(1.05);box-shadow:0 2px 8px rgba(26,115,232,0.12)}
+.int-chip.active{border-color:var(--accent);background:var(--pill-bg);box-shadow:0 2px 8px rgba(26,115,232,0.15)}
+.int-chip .int-label{position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);font-size:0.6rem;color:var(--text3);white-space:nowrap;opacity:0;transition:opacity 0.15s}
+.int-chip:hover .int-label{opacity:1}
+.int-chip img,.int-chip svg{width:22px;height:22px;object-fit:contain}
+
+/* NO-API badge */
+.no-api-badge{margin-top:0.75rem;background:linear-gradient(135deg,#fff3e0,#fce4ec);border:1px solid #ffccbc;border-radius:10px;padding:0.6rem 0.75rem;font-size:0.72rem;color:#bf360c;font-weight:500;text-align:center;line-height:1.4}
+.no-api-badge strong{display:block;font-size:0.78rem;margin-bottom:2px;color:#8b1a00}
+
+/* CENTER — robot */
+.center-stage{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;position:relative}
+.robot-ring{
+  width:160px;height:160px;border-radius:50%;
+  background:linear-gradient(135deg,#e8f0fe,#f3e8fd);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+  animation:ringPulse 3s ease-in-out infinite;
+}
+@keyframes ringPulse{0%,100%{box-shadow:0 0 0 0 rgba(26,115,232,0.2),0 0 0 0 rgba(161,66,244,0.1)}50%{box-shadow:0 0 0 16px rgba(26,115,232,0.05),0 0 0 32px rgba(161,66,244,0.03)}}
+.robot-emoji{font-size:5rem;animation:robotBob 2s ease-in-out infinite;filter:drop-shadow(0 4px 12px rgba(26,115,232,0.2))}
+@keyframes robotBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+.status-chip{
+  background:#fff;border:1px solid var(--border);border-radius:100px;
+  padding:0.35rem 1rem;font-size:0.8rem;color:var(--text2);
+  display:flex;align-items:center;gap:6px;
+  box-shadow:0 1px 4px rgba(0,0,0,0.06);
+}
+.status-dot{width:7px;height:7px;border-radius:50%;background:#34a853;animation:blink 1.2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+
+.flow-lines{position:absolute;inset:0;pointer-events:none}
+
+/* particles */
+.particle{position:absolute;width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:0;animation:flowParticle 2.5s ease-in-out infinite}
+@keyframes flowParticle{0%{opacity:0;transform:translate(0,0) scale(0.5)}20%{opacity:0.8;transform:translate(0,0) scale(1)}80%{opacity:0.8}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(0.5)}}
+
+/* task log */
+.task-log{width:100%;background:#f8f9fd;border:1px solid var(--border);border-radius:12px;padding:0.75rem 1rem;max-height:120px;overflow:hidden}
+.task-log-line{font-size:0.72rem;font-family:'Courier New',monospace;color:var(--text3);line-height:1.8;transition:all 0.3s}
+.task-log-line.done{color:#1e8e3e}
+.task-log-line.running{color:var(--accent)}
+
+/* RIGHT — outcomes */
+.outcomes-col{display:flex;flex-direction:column;gap:0.75rem}
+.outcome-card{
+  background:#0d1b2a;border-radius:14px;padding:1rem 1.1rem;
+  border:1px solid rgba(255,255,255,0.06);
+  transition:transform 0.2s,box-shadow 0.2s;
+}
+.outcome-card:hover{transform:translateX(-3px);box-shadow:-4px 0 16px rgba(26,115,232,0.15)}
+.outcome-title{font-size:0.78rem;font-weight:500;color:#e8eaf0;margin-bottom:0.6rem}
+.outcome-bars{display:flex;flex-direction:column;gap:0.4rem}
+.obar{height:7px;border-radius:100px;background:rgba(255,255,255,0.08)}
+.obar.blue{background:linear-gradient(90deg,#1a73e8,#4fc3f7);width:85%}
+.obar.purple{background:linear-gradient(90deg,#a142f4,#ce93d8);width:65%}
+.obar.green{background:linear-gradient(90deg,#34a853,#81c995);width:90%}
+.obar.amber{background:linear-gradient(90deg,#f9ab00,#fdd663);width:50%}
+.outcome-meta{font-size:0.68rem;color:rgba(255,255,255,0.35);margin-top:0.5rem}
+
+/* TABS */
+.tabs-wrap{max-width:1100px;margin:0 auto;padding:0 3vw 5rem}
+.tabs-header{display:flex;gap:0.5rem;margin-bottom:2rem;flex-wrap:wrap}
+.tab-btn{background:var(--surface);border:1.5px solid var(--border);border-radius:100px;padding:0.5rem 1.25rem;font-family:var(--font);font-size:0.875rem;font-weight:500;color:var(--text2);cursor:pointer;transition:all 0.15s}
+.tab-btn:hover{border-color:var(--accent);color:var(--accent)}
+.tab-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.tab-content{display:none}
+.tab-content.active{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem}
+.flow-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:1.75rem;transition:box-shadow 0.2s,transform 0.2s}
+.flow-card:hover{box-shadow:0 4px 20px rgba(26,115,232,0.09);transform:translateY(-2px)}
+.flow-card-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:1rem}
+.ic-blue{background:#e8f0fe}.ic-purple{background:#f3e8fd}.ic-teal{background:#e6f4f1}.ic-amber{background:#fef3e2}.ic-green{background:#e6f4ea}
+.flow-card-title{font-weight:500;font-size:0.95rem;color:var(--text);margin-bottom:0.5rem}
+.flow-card-desc{font-size:0.855rem;color:var(--text2);line-height:1.65}
+.flow-steps{margin-top:1rem;display:flex;flex-direction:column;gap:0.4rem}
+.flow-step{display:flex;align-items:center;gap:8px;font-size:0.78rem;color:var(--text2)}
+.flow-step-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0}
+
+/* NO API SECTION */
+.no-api-section{max-width:1100px;margin:0 auto;padding:0 3vw 5rem}
+.no-api-card{background:linear-gradient(135deg,#0d1b2a 0%,#1a237e 100%);border-radius:24px;padding:3rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+.no-api-card h2{font-family:var(--font-display);font-size:clamp(1.6rem,2.5vw,2.2rem);font-weight:500;color:#fff;margin-bottom:1rem;line-height:1.2}
+.no-api-card p{color:rgba(255,255,255,0.65);font-size:0.95rem;line-height:1.7;margin-bottom:1.5rem}
+.no-api-tags{display:flex;flex-wrap:wrap;gap:0.5rem}
+.no-api-tag{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:100px;padding:0.3rem 0.85rem;font-size:0.78rem;color:rgba(255,255,255,0.7)}
+.no-api-visual{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:1.5rem}
+.ui-sim{display:flex;flex-direction:column;gap:0.75rem}
+.ui-sim-bar{height:8px;border-radius:100px;background:rgba(255,255,255,0.08)}
+.ui-sim-row{display:flex;gap:0.5rem}
+.ui-sim-btn{height:28px;border-radius:8px;background:rgba(26,115,232,0.4);flex:1;animation:uiClick 3s ease-in-out infinite}
+.ui-sim-btn.clicked{background:rgba(26,115,232,0.8);animation:uiClick 3s ease-in-out infinite 1s}
+@keyframes uiClick{0%,90%,100%{opacity:0.4}45%,55%{opacity:1;transform:scale(0.97)}}
+.ui-sim-input{height:32px;border-radius:8px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;padding:0 0.75rem}
+.ui-sim-cursor{width:2px;height:14px;background:#8ab4f8;animation:cursor 1s step-end infinite}
+@keyframes cursor{0%,100%{opacity:1}50%{opacity:0}}
+.ui-sim-typed{font-size:0.72rem;color:#8ab4f8;font-family:monospace}
+.ui-sim-label{font-size:0.65rem;color:rgba(255,255,255,0.3);margin-bottom:2px}
+.robot-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(26,115,232,0.15);border:1px solid rgba(26,115,232,0.3);border-radius:100px;padding:0.3rem 0.85rem;font-size:0.75rem;color:#8ab4f8;margin-bottom:1rem}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:1.75rem 5vw;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;max-width:1080px;margin:0 auto}
+.footer-logo{font-family:var(--font-display);font-weight:500;font-size:1.1rem;color:var(--text)}
+.footer-logo span{color:var(--accent)}
+.footer-copy{font-size:0.8rem;color:var(--text3)}
+.footer-links{display:flex;gap:1.5rem}
+.footer-links a{font-size:0.8rem;color:var(--text3);text-decoration:none}
+.footer-links a:hover{color:var(--accent)}
+
+@media(max-width:800px){
+  .demo-stage{grid-template-columns:1fr;min-height:auto}
+  .integrations-panel,.outcomes-col{display:none}
+  .no-api-card{grid-template-columns:1fr}
+  .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">Sci<span>ons</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="automation.html" class="active">Automation</a></li>
+    <li><a href="index.html#process">Process</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <a href="index.html#contact" class="nav-cta">Get in touch</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero-wrap">
+  <div class="eyebrow">IT Automation</div>
+  <h1>Your workflows,<br><span class="grad">automated end-to-end</span></h1>
+  <p>We automate onboarding, offboarding, and IT operations using APIs — and for apps without APIs, we use UI automation so nothing gets left behind.</p>
+  <div class="hero-ctas">
+    <a href="index.html#contact" class="btn-primary">Automate my workflows</a>
+    <a href="#how-it-works" class="btn-ghost">See how it works</a>
+  </div>
+</div>
+
+<!-- INTERACTIVE DEMO -->
+<div class="demo-wrap" id="how-it-works">
+  <div class="demo-stage">
+
+    <!-- LEFT: integrations -->
+    <div class="integrations-panel">
+      <div class="panel-title">Connected apps</div>
+      <style>
+        .int-chip img{width:26px;height:26px;object-fit:contain;border-radius:4px}
+      </style>
+      <div class="integrations-grid" id="int-grid">
+        <div class="int-chip active" data-name="Microsoft 365">
+          <img src="https://logo.clearbit.com/microsoft.com" alt="M365" onerror="this.outerHTML='<span style=font-size:1.2rem>🟦</span>'"/>
+          <span class="int-label">M365</span>
+        </div>
+        <div class="int-chip" data-name="Google Workspace">
+          <img src="https://logo.clearbit.com/workspace.google.com" alt="Google" onerror="this.outerHTML='<span style=font-size:1.2rem>🔵</span>'"/>
+          <span class="int-label">Google</span>
+        </div>
+        <div class="int-chip" data-name="Slack">
+          <img src="https://logo.clearbit.com/slack.com" alt="Slack" onerror="this.outerHTML='<span style=font-size:1.2rem>💬</span>'"/>
+          <span class="int-label">Slack</span>
+        </div>
+        <div class="int-chip" data-name="Active Directory">
+          <img src="https://logo.clearbit.com/azure.microsoft.com" alt="Azure AD" onerror="this.outerHTML='<span style=font-size:1.2rem>🔷</span>'"/>
+          <span class="int-label">Azure AD</span>
+        </div>
+        <div class="int-chip" data-name="Jira">
+          <img src="https://logo.clearbit.com/atlassian.com" alt="Jira" onerror="this.outerHTML='<span style=font-size:1.2rem>📋</span>'"/>
+          <span class="int-label">Jira</span>
+        </div>
+        <div class="int-chip" data-name="GitHub">
+          <img src="https://logo.clearbit.com/github.com" alt="GitHub" onerror="this.outerHTML='<span style=font-size:1.2rem>🐙</span>'"/>
+          <span class="int-label">GitHub</span>
+        </div>
+        <div class="int-chip" data-name="AWS">
+          <img src="https://logo.clearbit.com/aws.amazon.com" alt="AWS" onerror="this.outerHTML='<span style=font-size:1.2rem>☁️</span>'"/>
+          <span class="int-label">AWS</span>
+        </div>
+        <div class="int-chip" data-name="Okta">
+          <img src="https://logo.clearbit.com/okta.com" alt="Okta" onerror="this.outerHTML='<span style=font-size:1.2rem>🔐</span>'"/>
+          <span class="int-label">Okta</span>
+        </div>
+        <div class="int-chip" data-name="Zoom">
+          <img src="https://logo.clearbit.com/zoom.us" alt="Zoom" onerror="this.outerHTML='<span style=font-size:1.2rem>📹</span>'"/>
+          <span class="int-label">Zoom</span>
+        </div>
+      </div>
+      <div class="no-api-badge">
+        <strong>🤖 No API? No problem.</strong>
+        We automate legacy apps, web portals & desktop software using UI automation
+      </div>
+    </div>
+
+    <!-- CENTER: robot -->
+    <div class="center-stage">
+      <div class="robot-ring">
+        <div class="robot-emoji">🤖</div>
+      </div>
+      <div class="status-chip">
+        <div class="status-dot"></div>
+        <span id="status-text">Automating tasks...</span>
+      </div>
+      <div class="task-log" id="task-log">
+        <div class="task-log-line done">✔ Trigger received: new hire added</div>
+        <div class="task-log-line done">✔ M365 account created</div>
+        <div class="task-log-line running">⟳ Provisioning Slack workspace...</div>
+        <div class="task-log-line">◦ Assigning GitHub access</div>
+        <div class="task-log-line">◦ Sending welcome email</div>
+      </div>
+    </div>
+
+    <!-- RIGHT: outcomes -->
+    <div class="outcomes-col">
+      <div class="outcome-card">
+        <div class="outcome-title">✅ Account created</div>
+        <div class="outcome-bars">
+          <div class="obar blue"></div>
+          <div class="obar purple" style="width:55%"></div>
+        </div>
+        <div class="outcome-meta">M365 · AD · Okta synced</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-title">📬 Welcome sent</div>
+        <div class="outcome-bars">
+          <div class="obar green"></div>
+          <div class="obar blue" style="width:40%"></div>
+        </div>
+        <div class="outcome-meta">Email + Slack onboarding</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-title">📄 Report saved</div>
+        <div class="outcome-bars">
+          <div class="obar amber"></div>
+          <div class="obar green" style="width:75%"></div>
+        </div>
+        <div class="outcome-meta">Audit log generated</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- TABS: automation types -->
+<div class="tabs-wrap">
+  <div class="tabs-header">
+    <button class="tab-btn active" onclick="switchTab(this,'onboarding')">🚀 Onboarding</button>
+    <button class="tab-btn" onclick="switchTab(this,'offboarding')">🔒 Offboarding</button>
+    <button class="tab-btn" onclick="switchTab(this,'infra')">🏗️ Infrastructure</button>
+    <button class="tab-btn" onclick="switchTab(this,'noapi')">🤖 No-API apps</button>
+  </div>
+
+  <div class="tab-content active" id="tab-onboarding">
+    <div class="flow-card">
+      <div class="flow-card-icon ic-blue">👤</div>
+      <div class="flow-card-title">Account provisioning</div>
+      <div class="flow-card-desc">Automatically create accounts across all your platforms the moment a new hire is confirmed in your HR system.</div>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="flow-step-dot"></div>HR trigger received</div>
+        <div class="flow-step"><div class="flow-step-dot"></div>M365 / Google Workspace account created</div>
+        <div class="flow-step"><div class="flow-step-dot"></div>Active Directory profile synced</div>
+        <div class="flow-step"><div class="flow-step-dot"></div>SSO / Okta enrolled</div>
+      </div>
+    </div>
+    <div class="flow-card">
+      <div class="flow-card-icon ic-purple">💬</div>
+      <div class="flow-card-title">App access & permissions</div>
+      <div class="flow-card-desc">Role-based access automatically assigned to Slack, Jira, GitHub, and any other tool based on department and role.</div>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="flow-step-dot"></div>Role detected from HR data</div>
+        <div class="flow-step"><div class="flow-step-dot"></div>Slack channels joined</div>
+        <div class="flow-step"><div class="flow-step-dot"></div>Jira project access granted</div>
+        <div class="flow-step"><div class="flow-step-dot"></div>GitHub team membership set</div>
+      </div>
+    </div>
+    <div class="flow-card">
+      <div class="flow-card-icon ic-teal">📧</div>
+      <div class="flow-card-title">Welcome & documentation</div>
+      <div class="flow-card-desc">Automated welcome emails, Slack introductions, and a personalised onboarding doc sent before day one.</div>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="flow-step-dot"></div>Welcome email dispatched</div>
+        <div class="flow-step"><div class="flow-step-dot"></div>Slack intro message posted</div>
+        <div class="flow-step"><div class="flow-step-dot"></div>Onboarding doc generated</div>
+        <div class="flow-step"><div class="flow-step-dot"></div>Audit log saved</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="tab-offboarding">
+    <div class="flow-card">
+      <div class="flow-card-icon ic-blue">🔑</div>
+      <div class="flow-card-title">Instant access revocation</div>
+      <div class="flow-card-desc">The moment an offboarding is triggered, all accounts are locked and access revoked across every platform simultaneously.</div>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="flow-step-dot"></div>Trigger from HR or manual</div>
+        <div class="flow-step"><div class="flow-step-dot"></div>M365 / Google account disabled</div>
+        <div class="flow-step"><div class="flow-step-dot"></div>All sessions invalidated</div>
+        <div class="flow-step"><div class="flow-step-dot"></div>MFA devices removed</div>
+      </div>
+    </div>
+    <div class="flow-card">
+      <div class="flow-card-icon ic-amber">📦</div>
+      <div class="flow-card-title">Data & asset transfer</div>
+      <div class="flow-card-desc">Files, emails, and owned resources automatically transferred to the manager or designated successor.</div>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="flow-step-dot"></div>Drive ownership transferred</div>
+        <div class="flow-step"><div class="flow-step-dot"></div>Email forwarding set up</div>
+        <div class="flow-step"><div class="flow-step-dot"></div>Slack messages archived</div>
+        <div class="flow-step"><div class="flow-step-dot"></div>License de-allocated</div>
+      </div>
+    </div>
+    <div class="flow-card">
+      <div class="flow-card-icon ic-green">📄</div>
+      <div class="flow-card-title">Compliance audit report</div>
+      <div class="flow-card-desc">A full offboarding report generated automatically — who, what, when — for HR, legal, and security compliance.</div>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="flow-step-dot"></div>All actions timestamped</div>
+        <div class="flow-step"><div class="flow-step-dot"></div>PDF report generated</div>
+        <div class="flow-step"><div class="flow-step-dot"></div>Sent to HR & IT manager</div>
+        <div class="flow-step"><div class="flow-step-dot"></div>Stored for audit trail</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="tab-infra">
+    <div class="flow-card">
+      <div class="flow-card-icon ic-blue">☁️</div>
+      <div class="flow-card-title">Cloud provisioning</div>
+      <div class="flow-card-desc">Spin up secure, cost-optimised cloud environments on AWS, Azure, or GCP using Infrastructure as Code.</div>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="flow-step-dot"></div>Terraform / Bicep templates</div>
+        <div class="flow-step"><div class="flow-step-dot"></div>Network & security groups configured</div>
+        <div class="flow-step"><div class="flow-step-dot"></div>Cost guardrails applied</div>
+        <div class="flow-step"><div class="flow-step-dot"></div>Documentation auto-generated</div>
+      </div>
+    </div>
+    <div class="flow-card">
+      <div class="flow-card-icon ic-purple">🔄</div>
+      <div class="flow-card-title">CI/CD & deployments</div>
+      <div class="flow-card-desc">Automated pipelines for building, testing, and deploying your applications with zero-downtime rollouts.</div>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="flow-step-dot"></div>GitHub Actions / Azure DevOps</div>
+        <div class="flow-step"><div class="flow-step-dot"></div>Automated testing gates</div>
+        <div class="flow-step"><div class="flow-step-dot"></div>Staged rollout strategy</div>
+        <div class="flow-step"><div class="flow-step-dot"></div>Rollback on failure</div>
+      </div>
+    </div>
+    <div class="flow-card">
+      <div class="flow-card-icon ic-teal">📊</div>
+      <div class="flow-card-title">Monitoring & alerts</div>
+      <div class="flow-card-desc">Automated monitoring, alerting, and self-healing scripts so issues are caught and resolved before they impact your business.</div>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="flow-step-dot"></div>Uptime & performance tracking</div>
+        <div class="flow-step"><div class="flow-step-dot"></div>PagerDuty / Teams alerts</div>
+        <div class="flow-step"><div class="flow-step-dot"></div>Auto-remediation scripts</div>
+        <div class="flow-step"><div class="flow-step-dot"></div>Weekly health reports</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="tab-noapi">
+    <div class="flow-card">
+      <div class="flow-card-icon ic-amber">🖱️</div>
+      <div class="flow-card-title">Web portal automation</div>
+      <div class="flow-card-desc">We automate web-based portals that have no API — logging in, filling forms, extracting data, and triggering actions automatically.</div>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="flow-step-dot"></div>Browser automation (Playwright)</div>
+        <div class="flow-step"><div class="flow-step-dot"></div>Scheduled or event-triggered</div>
+        <div class="flow-step"><div class="flow-step-dot"></div>Data extracted & structured</div>
+        <div class="flow-step"><div class="flow-step-dot"></div>Results sent to your systems</div>
+      </div>
+    </div>
+    <div class="flow-card">
+      <div class="flow-card-icon ic-purple">🖥️</div>
+      <div class="flow-card-title">Desktop app automation</div>
+      <div class="flow-card-desc">Legacy desktop software, ERP systems, and internal tools automated using RPA — no code changes needed on the app side.</div>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="flow-step-dot"></div>UI element detection</div>
+        <div class="flow-step"><div class="flow-step-dot"></div>Keyboard / mouse simulation</div>
+        <div class="flow-step"><div class="flow-step-dot"></div>Works with any Windows app</div>
+        <div class="flow-step"><div class="flow-step-dot"></div>Error handling & retries</div>
+      </div>
+    </div>
+    <div class="flow-card">
+      <div class="flow-card-icon ic-green">🔗</div>
+      <div class="flow-card-title">Hybrid API + UI flows</div>
+      <div class="flow-card-desc">Mix API calls and UI automation in a single workflow — use the API where it exists, UI automation where it doesn't.</div>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="flow-step-dot"></div>API calls for modern systems</div>
+        <div class="flow-step"><div class="flow-step-dot"></div>UI automation for legacy apps</div>
+        <div class="flow-step"><div class="flow-step-dot"></div>Unified workflow orchestration</div>
+        <div class="flow-step"><div class="flow-step-dot"></div>Single audit trail</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NO API HIGHLIGHT -->
+<div class="no-api-section">
+  <div class="no-api-card">
+    <div>
+      <div class="robot-badge">🤖 UI Automation</div>
+      <h2>No API? We still automate it.</h2>
+      <p>Most automation tools stop when there's no API. We don't. Using browser and desktop UI automation, we can automate virtually any application — legacy ERPs, government portals, internal web tools, even old Windows software.</p>
+      <div class="no-api-tags">
+        <span class="no-api-tag">Legacy ERP systems</span>
+        <span class="no-api-tag">Government portals</span>
+        <span class="no-api-tag">Internal web tools</span>
+        <span class="no-api-tag">Desktop software</span>
+        <span class="no-api-tag">Accounting apps</span>
+        <span class="no-api-tag">Payroll systems</span>
+        <span class="no-api-tag">Any web portal</span>
+      </div>
+    </div>
+    <div class="no-api-visual">
+      <div style="font-size:0.72rem;color:rgba(255,255,255,0.4);margin-bottom:0.75rem;letter-spacing:0.05em;text-transform:uppercase">Robot navigating app UI</div>
+      <div class="ui-sim">
+        <div class="ui-sim-label" style="color:rgba(255,255,255,0.3);font-size:0.65rem">Legacy portal — no API available</div>
+        <div class="ui-sim-bar" style="width:80%"></div>
+        <div class="ui-sim-bar" style="width:55%"></div>
+        <div class="ui-sim-input">
+          <div class="ui-sim-typed" id="typed-text"></div>
+          <div class="ui-sim-cursor"></div>
+        </div>
+        <div class="ui-sim-row">
+          <div class="ui-sim-btn"></div>
+          <div class="ui-sim-btn clicked"></div>
+        </div>
+        <div class="ui-sim-bar" style="width:70%;margin-top:0.25rem"></div>
+        <div style="margin-top:0.75rem;font-size:0.7rem;color:#34a853;font-family:monospace">✔ Form submitted · Data extracted · Task complete</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">Sci<span>ons</span></div>
+  <div class="footer-copy">© 2025 Scions. All rights reserved.</div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="index.html#contact">Contact</a>
+    <a href="#">Privacy</a>
+  </div>
+</footer>
+
+<script>
+function switchTab(btn, id) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-' + id).classList.add('active');
+}
+
+// Animate integration chips
+const chips = document.querySelectorAll('.int-chip');
+let activeChip = 0;
+setInterval(() => {
+  chips[activeChip].classList.remove('active');
+  activeChip = (activeChip + 1) % chips.length;
+  chips[activeChip].classList.add('active');
+}, 1200);
+
+// Animate task log
+const logs = [
+  ['✔ Trigger received: new hire added', '✔ M365 account created', '⟳ Provisioning Slack workspace...', '◦ Assigning GitHub access', '◦ Sending welcome email'],
+  ['✔ Slack workspace provisioned', '✔ GitHub access assigned', '⟳ Sending welcome email...', '◦ Generating onboarding doc', '◦ Notifying manager'],
+  ['✔ Welcome email sent', '✔ Onboarding doc created', '⟳ Notifying manager...', '◦ Logging to audit trail', '◦ Closing workflow'],
+  ['✔ Manager notified', '✔ Audit log saved', '✔ Workflow complete ✓', '◦ Next: offboarding ready', '◦ All systems synced'],
+];
+const statuses = ['Provisioning accounts...', 'Granting app access...', 'Sending notifications...', 'Generating reports...'];
+let logIdx = 0;
+function updateLog() {
+  const log = logs[logIdx % logs.length];
+  const logEl = document.getElementById('task-log');
+  logEl.innerHTML = '';
+  log.forEach((line, i) => {
+    const div = document.createElement('div');
+    div.className = 'task-log-line' + (line.startsWith('✔') ? ' done' : line.startsWith('⟳') ? ' running' : '');
+    div.textContent = line;
+    logEl.appendChild(div);
+  });
+  document.getElementById('status-text').textContent = statuses[logIdx % statuses.length];
+  logIdx++;
+}
+setInterval(updateLog, 2500);
+
+// Typewriter for no-api section
+const words = ['john.smith', 'EMP-2024', 'Finance-Dept', 'Level-2-Access'];
+let wi = 0, ci = 0, typing = true;
+function typeStep() {
+  const el = document.getElementById('typed-text');
+  if (!el) return;
+  const word = words[wi % words.length];
+  if (typing) {
+    el.textContent = word.substring(0, ci + 1);
+    ci++;
+    if (ci >= word.length) { typing = false; setTimeout(typeStep, 1200); return; }
+  } else {
+    el.textContent = word.substring(0, ci - 1);
+    ci--;
+    if (ci <= 0) { typing = true; wi++; }
+  }
+  setTimeout(typeStep, typing ? 90 : 50);
+}
+typeStep();
+</script>
+</body>
+</html>
