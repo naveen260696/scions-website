@@ -206,45 +206,46 @@ footer{border-top:1px solid var(--border);padding:1.75rem 5vw;display:flex;align
     <h2 class="section-title">Services built for small business reality</h2>
     <p class="section-sub">No bloated retainers. No enterprise jargon. Just the right protection and automation for where you are now.</p>
     <div class="services-grid">
-      <a href="/cybersecurity" class="service-card">
-        <div class="svc-icon-wrap ic-blue">🔒</div>
-        <div class="svc-title">Cybersecurity assessment</div>
-        <div class="svc-desc">Identify vulnerabilities before attackers do. We audit your posture and deliver a clear remediation roadmap.</div>
-        <span class="svc-pill">Risk reduction</span>
+      <a href="/secops" class="service-card">
+        <div class="svc-icon-wrap ic-red" style="background:#fce8e6">🛡️</div>
+        <div class="svc-title">SecOps</div>
+        <div class="svc-desc">Full-spectrum cybersecurity — vulnerability assessment, penetration testing, and infrastructure hardening against AI-powered threats.</div>
+        <span class="svc-pill">Cybersecurity</span>
+        <div class="svc-arrow">Explore →</div>
+      </a>
+      <a href="/cloudops" class="service-card">
+        <div class="svc-icon-wrap ic-blue">☁️</div>
+        <div class="svc-title">CloudOps</div>
+        <div class="svc-desc">Lean, secure cloud infrastructure on AWS, Azure, or GCP — cost-optimised from day one and built to scale with your business.</div>
+        <span class="svc-pill">Infrastructure</span>
         <div class="svc-arrow">Explore →</div>
       </a>
       <a href="/automation" class="service-card">
         <div class="svc-icon-wrap ic-purple">⚙️</div>
-        <div class="svc-title">IT onboarding & offboarding</div>
-        <div class="svc-desc">Automate the employee lifecycle — provisioning, access controls, and secure offboarding in minutes, not days.</div>
+        <div class="svc-title">Automations</div>
+        <div class="svc-desc">End-to-end workflow automation using APIs — and for apps without APIs, we use UI automation so nothing gets left behind.</div>
         <span class="svc-pill">Automation</span>
         <div class="svc-arrow">Explore →</div>
       </a>
-      <a href="/automation" class="service-card">
-        <div class="svc-icon-wrap ic-teal">🏗️</div>
-        <div class="svc-title">Infrastructure at minimum cost</div>
-        <div class="svc-desc">Lean, secure infrastructure using modern cloud tools. Enterprise reliability without the enterprise price tag.</div>
-        <span class="svc-pill">Cost optimized</span>
-        <div class="svc-arrow">Explore →</div>
-      </a>
-      <div class="service-card">
-        <div class="svc-icon-wrap ic-blue">📄</div>
-        <div class="svc-title">Documentation & runbooks</div>
-        <div class="svc-desc">Every engagement comes fully documented. Policies and runbooks your team can actually follow.</div>
-        <span class="svc-pill">Knowledge transfer</span>
-      </div>
-      <a href="/cybersecurity" class="service-card">
-        <div class="svc-icon-wrap ic-purple">🛡️</div>
-        <div class="svc-title">Security policy development</div>
-        <div class="svc-desc">Acceptable use, incident response, password policies — tailored to your size and industry.</div>
-        <span class="svc-pill">Compliance ready</span>
-        <div class="svc-arrow">Explore →</div>
-      </a>
-      <a href="/automation" class="service-card">
+      <a href="/devops" class="service-card">
         <div class="svc-icon-wrap ic-teal">🔄</div>
-        <div class="svc-title">Workflow automation</div>
-        <div class="svc-desc">Eliminate repetitive IT tasks. Automated alerts, self-healing scripts, and more.</div>
-        <span class="svc-pill">Efficiency</span>
+        <div class="svc-title">DevOps</div>
+        <div class="svc-desc">CI/CD pipelines, containerisation, observability, and DevSecOps practices — with full runbooks and documentation at every step.</div>
+        <span class="svc-pill">Engineering</span>
+        <div class="svc-arrow">Explore →</div>
+      </a>
+      <a href="/development" class="service-card">
+        <div class="svc-icon-wrap ic-amber" style="background:#fef3e2">💻</div>
+        <div class="svc-title">Development</div>
+        <div class="svc-desc">Web apps, internal tools, APIs, and AI-powered features — pragmatically scoped, securely built, and handed over with full documentation.</div>
+        <span class="svc-pill">Software</span>
+        <div class="svc-arrow">Explore →</div>
+      </a>
+      <a href="/itops" class="service-card">
+        <div class="svc-icon-wrap ic-green" style="background:#e6f4ea">👥</div>
+        <div class="svc-title">ITOps</div>
+        <div class="svc-desc">Fully automated onboarding and offboarding across M365, Google Workspace, Slack, and every tool your business uses — in seconds, not days.</div>
+        <span class="svc-pill">IT Lifecycle</span>
         <div class="svc-arrow">Explore →</div>
       </a>
     </div>
@@ -377,15 +378,7 @@ footer{border-top:1px solid var(--border);padding:1.75rem 5vw;display:flex;align
   </div>
 </footer>
 
-<script>
-function handleSubmit(e){
-  e.preventDefault();
-  const btn=e.target.querySelector('.form-submit');
-  const orig=btn.textContent;
-  btn.textContent='Message sent ✓';
-  btn.style.background='#1e8e3e';
-  setTimeout(()=>{btn.textContent=orig;btn.style.background='';e.target.reset()},3000);
-}
-</script>
+
+<script src="/shared.js"></script>
 </body>
 </html>

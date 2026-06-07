@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>ITOps – Scions</title>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@300;400;500;600&family=Google+Sans+Display:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#f8f9fd;--surface:#fff;--text:#1c1b1f;--text2:#44464f;--text3:#76777f;--accent:#1a73e8;--border:#e3e6f0;--pill-bg:#e8f0fe;--pill-text:#1558b0;--red:#ef4444;--green:#22c55e;--amber:#f59e0b;--purple:#a142f4;--teal:#12b5cb;--font:'Google Sans','Segoe UI',system-ui,sans-serif;--font-display:'Google Sans Display','Google Sans',system-ui,sans-serif;--mono:'JetBrains Mono',monospace}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:16px;line-height:1.6;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 20% 10%,rgba(26,115,232,0.06) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(161,66,244,0.04) 0%,transparent 60%);pointer-events:none;z-index:0}
+section,nav,footer,.hero-wrap{position:relative;z-index:1}
+nav{display:flex;align-items:center;justify-content:space-between;padding:0 5vw;height:64px;background:rgba(248,249,253,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200}
+.logo{font-family:var(--font-display);font-size:1.35rem;font-weight:500;color:var(--text);text-decoration:none}.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:0.1rem;list-style:none}
+.nav-links a{color:var(--text2);text-decoration:none;font-size:0.82rem;padding:0.35rem 0.7rem;border-radius:100px;transition:background 0.15s,color 0.15s}
+.nav-links a:hover,.nav-links a.active{background:var(--pill-bg);color:var(--accent)}
+.nav-cta{background:var(--accent);color:#fff;border:none;padding:0.5rem 1.1rem;border-radius:100px;font-family:var(--font);font-size:0.85rem;font-weight:500;cursor:pointer;text-decoration:none;box-shadow:0 1px 3px rgba(26,115,232,0.3)}
+.nav-cta:hover{opacity:0.92}
+.hero-wrap{padding:5rem 5vw 3rem;max-width:1100px;margin:0 auto;text-align:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:0.78rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:0.3rem 1rem;border-radius:100px;margin-bottom:1.25rem}
+.hero-wrap h1{font-family:var(--font-display);font-size:clamp(2.2rem,4.5vw,3.8rem);font-weight:500;line-height:1.12;letter-spacing:-0.02em;color:var(--text);margin-bottom:1.25rem}
+.grad{background:linear-gradient(135deg,#1a73e8 0%,#a142f4 55%,#12b5cb 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-wrap p{font-size:1.05rem;color:var(--text2);max-width:580px;margin:0 auto 2.5rem;line-height:1.75}
+.hero-ctas{display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--accent);color:#fff;border:none;padding:0.8rem 1.75rem;border-radius:100px;font-family:var(--font);font-size:0.95rem;font-weight:500;cursor:pointer;text-decoration:none;box-shadow:0 1px 3px rgba(26,115,232,0.3);transition:box-shadow 0.2s,transform 0.15s;display:inline-block}
+.btn-primary:hover{box-shadow:0 4px 12px rgba(26,115,232,0.35);transform:translateY(-1px)}
+.btn-ghost{background:var(--surface);color:var(--accent);border:1.5px solid var(--border);padding:0.8rem 1.75rem;border-radius:100px;font-family:var(--font);font-size:0.95rem;font-weight:500;cursor:pointer;text-decoration:none;transition:border-color 0.2s;display:inline-block}
+.btn-ghost:hover{border-color:var(--accent);background:var(--pill-bg)}
+.section{padding:4.5rem 5vw;max-width:1100px;margin:0 auto}
+.sec-border{border-top:1px solid var(--border)}
+.section-eyebrow{display:inline-block;font-size:0.75rem;font-weight:500;letter-spacing:0.08em;color:var(--accent);text-transform:uppercase;background:var(--pill-bg);padding:0.25rem 0.75rem;border-radius:100px;margin-bottom:0.85rem}
+.section-title{font-family:var(--font-display);font-size:clamp(1.7rem,3vw,2.4rem);font-weight:500;letter-spacing:-0.015em;line-height:1.2;margin-bottom:0.9rem;color:var(--text)}
+.section-sub{color:var(--text2);font-size:1rem;max-width:520px;margin-bottom:2.75rem;line-height:1.7}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:1.75rem;transition:box-shadow 0.2s,border-color 0.2s,transform 0.2s}
+.card:hover{box-shadow:0 4px 20px rgba(26,115,232,0.09);border-color:rgba(26,115,232,0.25);transform:translateY(-2px)}
+.card-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1rem}
+.ic-blue{background:#e8f0fe}.ic-purple{background:#f3e8fd}.ic-teal{background:#e6f4f1}.ic-amber{background:#fef3e2}.ic-green{background:#e6f4ea}.ic-red{background:#fce8e6}
+.card-title{font-weight:500;font-size:0.98rem;color:var(--text);margin-bottom:0.45rem}
+.card-desc{font-size:0.855rem;color:var(--text2);line-height:1.65}
+.card-tags{display:flex;flex-wrap:wrap;gap:0.35rem;margin-top:0.85rem}
+.tag{font-size:0.68rem;color:var(--pill-text);background:var(--pill-bg);border-radius:100px;padding:0.18rem 0.6rem}
+.steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+.step{padding:1.75rem 1.25rem;border-left:1px solid var(--border)}
+.step:first-child{border-left:none}
+.step-num{font-family:var(--mono);font-size:0.7rem;color:var(--accent);margin-bottom:0.6rem;letter-spacing:0.04em}
+.step-title{font-weight:500;font-size:0.88rem;color:var(--text);margin-bottom:0.35rem}
+.step-desc{font-size:0.8rem;color:var(--text2);line-height:1.6}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:2.5rem}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.4rem;position:relative;overflow:hidden}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--purple))}
+.stat-num{font-family:var(--font-display);font-size:2rem;font-weight:500;color:var(--accent);margin-bottom:0.2rem}
+.stat-label{font-size:0.8rem;color:var(--text2);line-height:1.5}
+.cta-band{background:linear-gradient(135deg,var(--pill-bg),#f3e8fd);border:1px solid var(--border);border-radius:24px;padding:3rem;text-align:center;margin:1rem 0 3rem}
+.cta-band h2{font-family:var(--font-display);font-size:clamp(1.5rem,2.5vw,2rem);font-weight:500;color:var(--text);margin-bottom:0.75rem}
+.cta-band p{color:var(--text2);font-size:0.95rem;max-width:480px;margin:0 auto 1.75rem}
+footer{border-top:1px solid var(--border);padding:1.75rem 5vw;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;max-width:1200px;margin:0 auto}
+.footer-logo{font-family:var(--font-display);font-weight:500;font-size:1.1rem;color:var(--text)}.footer-logo span{color:var(--accent)}
+.footer-copy{font-size:0.8rem;color:var(--text3)}
+.footer-links{display:flex;gap:1.25rem;flex-wrap:wrap}
+.footer-links a{font-size:0.8rem;color:var(--text3);text-decoration:none}.footer-links a:hover{color:var(--accent)}
+@media(max-width:700px){.nav-links{display:none}.step{border-left:none;border-top:1px solid var(--border)}.step:first-child{border-top:none}}
+
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo">Sci<span>ons</span></a>
+  <ul class="nav-links">
+    <li><a href="/secops" >SecOps</a></li>
+    <li><a href="/cloudops" >CloudOps</a></li>
+    <li><a href="/automation" >Automations</a></li>
+    <li><a href="/devops" >DevOps</a></li>
+    <li><a href="/development" >Development</a></li>
+    <li><a href="/itops" class="active">ITOps</a></li>
+  </ul>
+  <button class="nav-cta" onclick="openModal()">Get in touch</button>
+</nav>
+<div class="hero-wrap">
+  <div class="eyebrow" style="color:#22c55e;background:#e6f4ea">👥 IT Operations</div>
+  <h1>Onboarding and offboarding,<br><span class="grad">automated end-to-end</span></h1>
+  <p>From new hire to exit — fully automated IT lifecycle management across Microsoft 365, Google Workspace, Slack, Active Directory, and every other platform your business uses.</p>
+  <div class="hero-ctas">
+    <button class="btn-primary" onclick="openModal('itops')">Get started with ITOps</button>
+    <a href="/" class="btn-ghost">← Back to home</a>
+  </div>
+</div>
+
+<section class="sec-border"><div class="section">
+  <div class="section-eyebrow">The problem</div>
+  <h2 class="section-title">Manual IT onboarding costs you more than you think</h2>
+  <p class="section-sub">Each manual onboarding takes 4–8 hours of IT time. Each offboarding that isn't done properly is a security incident waiting to happen.</p>
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-num">4.2s</div><div class="stat-label">to complete a full automated offboarding vs 4–8 hours manually</div></div>
+    <div class="stat-card"><div class="stat-num">58%</div><div class="stat-label">of data breaches involve compromised credentials from ex-employees (Verizon DBIR)</div></div>
+    <div class="stat-card"><div class="stat-num">$12K</div><div class="stat-label">average cost of a single insider threat incident from improper offboarding</div></div>
+    <div class="stat-card"><div class="stat-num">100%</div><div class="stat-label">audit trail — every action logged, timestamped, and reportable for compliance</div></div>
+  </div>
+</div></section>
+
+<section class="sec-border"><div class="section">
+  <div class="section-eyebrow">What we do</div>
+  <h2 class="section-title">Automated IT lifecycle management</h2>
+  <p class="section-sub">From the moment a hire is confirmed to the moment they leave — fully automated, fully documented, fully secure.</p>
+  <div class="card-grid">
+    <div class="card"><div class="card-icon ic-green">👤</div><div class="card-title">Automated onboarding</div><div class="card-desc">New hire confirmed in HR → accounts created across M365, Google Workspace, Active Directory, Slack, and all role-based apps — automatically, before day one.</div><div class="card-tags"><span class="tag">M365</span><span class="tag">Google Workspace</span><span class="tag">Slack</span><span class="tag">Active Directory</span></div></div>
+    <div class="card"><div class="card-icon ic-red">🔒</div><div class="card-title">Instant offboarding</div><div class="card-desc">Termination triggered → all accounts disabled, sessions revoked, MFA removed, and data transferred to manager — in seconds, not days. Zero access left behind.</div><div class="card-tags"><span class="tag">Access revocation</span><span class="tag">Session termination</span><span class="tag">Data transfer</span></div></div>
+    <div class="card"><div class="card-icon ic-blue">🔑</div><div class="card-title">Role-based access control</div><div class="card-desc">Access profiles defined per role and department. New hires get exactly the right permissions — nothing more, nothing less — based on their position in the org.</div><div class="card-tags"><span class="tag">RBAC</span><span class="tag">Least privilege</span><span class="tag">Okta/Azure AD</span></div></div>
+    <div class="card"><div class="card-icon ic-purple">📄</div><div class="card-title">Compliance audit reports</div><div class="card-desc">Every onboarding and offboarding action logged and timestamped. Auto-generated PDF reports sent to HR, IT, and management for compliance and audit trails.</div><div class="card-tags"><span class="tag">Audit trail</span><span class="tag">PDF reports</span><span class="tag">PIPEDA compliant</span></div></div>
+    <div class="card"><div class="card-icon ic-amber">🤖</div><div class="card-title">No-API app automation</div><div class="card-desc">Even apps without APIs get automated — legacy portals, payroll systems, and desktop software handled via UI automation so nothing falls through the cracks.</div><div class="card-tags"><span class="tag">UI automation</span><span class="tag">Legacy apps</span><span class="tag">RPA</span></div></div>
+    <div class="card"><div class="card-icon ic-teal">📧</div><div class="card-title">Welcome & comms automation</div><div class="card-desc">Automated welcome emails, Slack onboarding messages, and personalised onboarding docs generated and delivered before the new hire's first day.</div><div class="card-tags"><span class="tag">Welcome emails</span><span class="tag">Slack messages</span><span class="tag">Onboarding docs</span></div></div>
+  </div>
+</div></section>
+
+<section class="sec-border"><div class="section">
+  <div class="section-eyebrow">What gets automated</div>
+  <h2 class="section-title">Supported platforms</h2>
+  <p class="section-sub">We integrate with all major platforms your team uses — and for anything else, we use UI automation.</p>
+  <div class="card-grid">
+    <div class="card" style="text-align:center;padding:1.25rem">
+      <div style="font-size:2rem;margin-bottom:0.5rem">🟦</div><div class="card-title">Microsoft 365</div><div class="card-desc" style="font-size:0.8rem">Exchange, Teams, SharePoint, OneDrive, Intune</div></div>
+    <div class="card" style="text-align:center;padding:1.25rem">
+      <div style="font-size:2rem;margin-bottom:0.5rem">🔴</div><div class="card-title">Google Workspace</div><div class="card-desc" style="font-size:0.8rem">Gmail, Drive, Meet, Calendar, Groups</div></div>
+    <div class="card" style="text-align:center;padding:1.25rem">
+      <div style="font-size:2rem;margin-bottom:0.5rem">💬</div><div class="card-title">Slack</div><div class="card-desc" style="font-size:0.8rem">Workspace provisioning, channel management, archiving</div></div>
+    <div class="card" style="text-align:center;padding:1.25rem">
+      <div style="font-size:2rem;margin-bottom:0.5rem">🔐</div><div class="card-title">Okta / Azure AD</div><div class="card-desc" style="font-size:0.8rem">SSO, MFA, lifecycle management, app assignment</div></div>
+    <div class="card" style="text-align:center;padding:1.25rem">
+      <div style="font-size:2rem;margin-bottom:0.5rem">🐙</div><div class="card-title">GitHub / GitLab</div><div class="card-desc" style="font-size:0.8rem">Team membership, repo access, SSH key management</div></div>
+    <div class="card" style="text-align:center;padding:1.25rem">
+      <div style="font-size:2rem;margin-bottom:0.5rem">🖥️</div><div class="card-title">+ Any app</div><div class="card-desc" style="font-size:0.8rem">Legacy portals, payroll, ERP — via UI automation</div></div>
+  </div>
+</div></section>
+
+<div class="section"><div class="cta-band">
+  <h2>Automate your IT lifecycle today</h2>
+  <p>Most clients go from manual to fully automated in under 2 weeks. Book a free call to get started.</p>
+  <button class="btn-primary" onclick="openModal('ITOps – Onboarding & Offboarding')">Book a free call</button>
+</div></div>
+<footer>
+  <div class="footer-logo">Sci<span>ons</span></div>
+  <div class="footer-copy">© 2025 Scions. All rights reserved.</div>
+  <div class="footer-links">
+    <a href="/secops">SecOps</a><a href="/cloudops">CloudOps</a>
+    <a href="/automation">Automations</a><a href="/devops">DevOps</a>
+    <a href="/development">Development</a><a href="/itops">ITOps</a>
+  </div>
+</footer>
+<script src="/shared.js"></script>
+</body>
+</html>

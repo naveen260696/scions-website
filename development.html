@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Development – Scions</title>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@300;400;500;600&family=Google+Sans+Display:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#f8f9fd;--surface:#fff;--text:#1c1b1f;--text2:#44464f;--text3:#76777f;--accent:#1a73e8;--border:#e3e6f0;--pill-bg:#e8f0fe;--pill-text:#1558b0;--red:#ef4444;--green:#22c55e;--amber:#f59e0b;--purple:#a142f4;--teal:#12b5cb;--font:'Google Sans','Segoe UI',system-ui,sans-serif;--font-display:'Google Sans Display','Google Sans',system-ui,sans-serif;--mono:'JetBrains Mono',monospace}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:16px;line-height:1.6;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 20% 10%,rgba(26,115,232,0.06) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(161,66,244,0.04) 0%,transparent 60%);pointer-events:none;z-index:0}
+section,nav,footer,.hero-wrap{position:relative;z-index:1}
+nav{display:flex;align-items:center;justify-content:space-between;padding:0 5vw;height:64px;background:rgba(248,249,253,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200}
+.logo{font-family:var(--font-display);font-size:1.35rem;font-weight:500;color:var(--text);text-decoration:none}.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:0.1rem;list-style:none}
+.nav-links a{color:var(--text2);text-decoration:none;font-size:0.82rem;padding:0.35rem 0.7rem;border-radius:100px;transition:background 0.15s,color 0.15s}
+.nav-links a:hover,.nav-links a.active{background:var(--pill-bg);color:var(--accent)}
+.nav-cta{background:var(--accent);color:#fff;border:none;padding:0.5rem 1.1rem;border-radius:100px;font-family:var(--font);font-size:0.85rem;font-weight:500;cursor:pointer;text-decoration:none;box-shadow:0 1px 3px rgba(26,115,232,0.3)}
+.nav-cta:hover{opacity:0.92}
+.hero-wrap{padding:5rem 5vw 3rem;max-width:1100px;margin:0 auto;text-align:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:0.78rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:0.3rem 1rem;border-radius:100px;margin-bottom:1.25rem}
+.hero-wrap h1{font-family:var(--font-display);font-size:clamp(2.2rem,4.5vw,3.8rem);font-weight:500;line-height:1.12;letter-spacing:-0.02em;color:var(--text);margin-bottom:1.25rem}
+.grad{background:linear-gradient(135deg,#1a73e8 0%,#a142f4 55%,#12b5cb 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-wrap p{font-size:1.05rem;color:var(--text2);max-width:580px;margin:0 auto 2.5rem;line-height:1.75}
+.hero-ctas{display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--accent);color:#fff;border:none;padding:0.8rem 1.75rem;border-radius:100px;font-family:var(--font);font-size:0.95rem;font-weight:500;cursor:pointer;text-decoration:none;box-shadow:0 1px 3px rgba(26,115,232,0.3);transition:box-shadow 0.2s,transform 0.15s;display:inline-block}
+.btn-primary:hover{box-shadow:0 4px 12px rgba(26,115,232,0.35);transform:translateY(-1px)}
+.btn-ghost{background:var(--surface);color:var(--accent);border:1.5px solid var(--border);padding:0.8rem 1.75rem;border-radius:100px;font-family:var(--font);font-size:0.95rem;font-weight:500;cursor:pointer;text-decoration:none;transition:border-color 0.2s;display:inline-block}
+.btn-ghost:hover{border-color:var(--accent);background:var(--pill-bg)}
+.section{padding:4.5rem 5vw;max-width:1100px;margin:0 auto}
+.sec-border{border-top:1px solid var(--border)}
+.section-eyebrow{display:inline-block;font-size:0.75rem;font-weight:500;letter-spacing:0.08em;color:var(--accent);text-transform:uppercase;background:var(--pill-bg);padding:0.25rem 0.75rem;border-radius:100px;margin-bottom:0.85rem}
+.section-title{font-family:var(--font-display);font-size:clamp(1.7rem,3vw,2.4rem);font-weight:500;letter-spacing:-0.015em;line-height:1.2;margin-bottom:0.9rem;color:var(--text)}
+.section-sub{color:var(--text2);font-size:1rem;max-width:520px;margin-bottom:2.75rem;line-height:1.7}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:1.75rem;transition:box-shadow 0.2s,border-color 0.2s,transform 0.2s}
+.card:hover{box-shadow:0 4px 20px rgba(26,115,232,0.09);border-color:rgba(26,115,232,0.25);transform:translateY(-2px)}
+.card-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1rem}
+.ic-blue{background:#e8f0fe}.ic-purple{background:#f3e8fd}.ic-teal{background:#e6f4f1}.ic-amber{background:#fef3e2}.ic-green{background:#e6f4ea}.ic-red{background:#fce8e6}
+.card-title{font-weight:500;font-size:0.98rem;color:var(--text);margin-bottom:0.45rem}
+.card-desc{font-size:0.855rem;color:var(--text2);line-height:1.65}
+.card-tags{display:flex;flex-wrap:wrap;gap:0.35rem;margin-top:0.85rem}
+.tag{font-size:0.68rem;color:var(--pill-text);background:var(--pill-bg);border-radius:100px;padding:0.18rem 0.6rem}
+.steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+.step{padding:1.75rem 1.25rem;border-left:1px solid var(--border)}
+.step:first-child{border-left:none}
+.step-num{font-family:var(--mono);font-size:0.7rem;color:var(--accent);margin-bottom:0.6rem;letter-spacing:0.04em}
+.step-title{font-weight:500;font-size:0.88rem;color:var(--text);margin-bottom:0.35rem}
+.step-desc{font-size:0.8rem;color:var(--text2);line-height:1.6}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:2.5rem}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.4rem;position:relative;overflow:hidden}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--purple))}
+.stat-num{font-family:var(--font-display);font-size:2rem;font-weight:500;color:var(--accent);margin-bottom:0.2rem}
+.stat-label{font-size:0.8rem;color:var(--text2);line-height:1.5}
+.cta-band{background:linear-gradient(135deg,var(--pill-bg),#f3e8fd);border:1px solid var(--border);border-radius:24px;padding:3rem;text-align:center;margin:1rem 0 3rem}
+.cta-band h2{font-family:var(--font-display);font-size:clamp(1.5rem,2.5vw,2rem);font-weight:500;color:var(--text);margin-bottom:0.75rem}
+.cta-band p{color:var(--text2);font-size:0.95rem;max-width:480px;margin:0 auto 1.75rem}
+footer{border-top:1px solid var(--border);padding:1.75rem 5vw;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;max-width:1200px;margin:0 auto}
+.footer-logo{font-family:var(--font-display);font-weight:500;font-size:1.1rem;color:var(--text)}.footer-logo span{color:var(--accent)}
+.footer-copy{font-size:0.8rem;color:var(--text3)}
+.footer-links{display:flex;gap:1.25rem;flex-wrap:wrap}
+.footer-links a{font-size:0.8rem;color:var(--text3);text-decoration:none}.footer-links a:hover{color:var(--accent)}
+@media(max-width:700px){.nav-links{display:none}.step{border-left:none;border-top:1px solid var(--border)}.step:first-child{border-top:none}}
+
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo">Sci<span>ons</span></a>
+  <ul class="nav-links">
+    <li><a href="/secops" >SecOps</a></li>
+    <li><a href="/cloudops" >CloudOps</a></li>
+    <li><a href="/automation" >Automations</a></li>
+    <li><a href="/devops" >DevOps</a></li>
+    <li><a href="/development" class="active">Development</a></li>
+    <li><a href="/itops" >ITOps</a></li>
+  </ul>
+  <button class="nav-cta" onclick="openModal()">Get in touch</button>
+</nav>
+<div class="hero-wrap">
+  <div class="eyebrow" style="color:#12b5cb;background:#e6f4f1">💻 Development</div>
+  <h1>Software that solves<br><span class="grad">real business problems</span></h1>
+  <p>We build web applications, internal tools, APIs, and AI-powered features — pragmatically scoped, securely built, and handed over with complete documentation.</p>
+  <div class="hero-ctas">
+    <button class="btn-primary" onclick="openModal('development')">Get started with Development</button>
+    <a href="/" class="btn-ghost">← Back to home</a>
+  </div>
+</div>
+
+<section class="sec-border"><div class="section">
+  <div class="section-eyebrow">What we build</div>
+  <h2 class="section-title">Software that solves real business problems</h2>
+  <p class="section-sub">We build internal tools, automation dashboards, integrations, and customer-facing web applications — pragmatically, at minimum cost.</p>
+  <div class="card-grid">
+    <div class="card"><div class="card-icon ic-blue">🌐</div><div class="card-title">Web application development</div><div class="card-desc">Full-stack web apps built with modern frameworks — React, Next.js, or plain HTML/CSS/JS depending on what's right for your use case and budget.</div><div class="card-tags"><span class="tag">React</span><span class="tag">Next.js</span><span class="tag">Node.js</span></div></div>
+    <div class="card"><div class="card-icon ic-purple">🔌</div><div class="card-title">API development & integration</div><div class="card-desc">REST and GraphQL APIs built and documented. Third-party integrations with Slack, Microsoft 365, Google Workspace, HubSpot, and more.</div><div class="card-tags"><span class="tag">REST/GraphQL</span><span class="tag">Webhooks</span><span class="tag">API docs</span></div></div>
+    <div class="card"><div class="card-icon ic-teal">🛠️</div><div class="card-title">Internal tooling</div><div class="card-desc">Custom dashboards, admin panels, reporting tools, and internal portals that replace expensive SaaS with something built exactly for your workflow.</div><div class="card-tags"><span class="tag">Dashboards</span><span class="tag">Admin panels</span><span class="tag">Reporting</span></div></div>
+    <div class="card"><div class="card-icon ic-amber">🤖</div><div class="card-title">AI-powered features</div><div class="card-desc">Integrate LLMs into your existing apps — chatbots, document analysis, automated reporting, and intelligent workflows using OpenAI, Claude, or open-source models.</div><div class="card-tags"><span class="tag">LLM integration</span><span class="tag">RAG</span><span class="tag">OpenAI/Claude</span></div></div>
+    <div class="card"><div class="card-icon ic-green">📱</div><div class="card-title">Progressive web apps</div><div class="card-desc">Mobile-friendly web apps that work offline, send push notifications, and install like native apps — without the cost of separate iOS and Android development.</div><div class="card-tags"><span class="tag">PWA</span><span class="tag">Offline-first</span><span class="tag">Push notifications</span></div></div>
+    <div class="card"><div class="card-icon ic-red">🔒</div><div class="card-title">Secure by design</div><div class="card-desc">Every application built with security fundamentals — input validation, authentication, authorisation, OWASP top 10 mitigations, and secrets management.</div><div class="card-tags"><span class="tag">OWASP</span><span class="tag">Auth/AuthZ</span><span class="tag">Secure coding</span></div></div>
+  </div>
+</div></section>
+
+<section class="sec-border"><div class="section">
+  <div class="section-eyebrow">Our process</div>
+  <h2 class="section-title">How we build</h2>
+  <div class="steps-grid">
+    <div class="step"><div class="step-num">01 / SCOPE</div><div class="step-title">Requirements & scoping</div><div class="step-desc">We define exactly what gets built, for how much, by when — no scope creep, no surprises.</div></div>
+    <div class="step"><div class="step-num">02 / DESIGN</div><div class="step-title">Design & architecture</div><div class="step-desc">UI mockups and technical architecture agreed before a line of code is written.</div></div>
+    <div class="step"><div class="step-num">03 / BUILD</div><div class="step-title">Iterative development</div><div class="step-desc">Short sprints with working software delivered regularly — you see progress every week.</div></div>
+    <div class="step"><div class="step-num">04 / TEST</div><div class="step-title">Testing & QA</div><div class="step-desc">Automated tests, manual QA, and security review before anything goes live.</div></div>
+    <div class="step"><div class="step-num">05 / SHIP</div><div class="step-title">Deploy & document</div><div class="step-desc">Deployed to production with full documentation and a handover walkthrough for your team.</div></div>
+  </div>
+</div></section>
+
+<div class="section"><div class="cta-band">
+  <h2>Have an idea? Let's scope it.</h2>
+  <p>Tell us what you need built and we'll give you an honest assessment of timeline, cost, and the right tech stack.</p>
+  <button class="btn-primary" onclick="openModal('Development')">Discuss your project</button>
+</div></div>
+<footer>
+  <div class="footer-logo">Sci<span>ons</span></div>
+  <div class="footer-copy">© 2025 Scions. All rights reserved.</div>
+  <div class="footer-links">
+    <a href="/secops">SecOps</a><a href="/cloudops">CloudOps</a>
+    <a href="/automation">Automations</a><a href="/devops">DevOps</a>
+    <a href="/development">Development</a><a href="/itops">ITOps</a>
+  </div>
+</footer>
+<script src="/shared.js"></script>
+</body>
+</html>
